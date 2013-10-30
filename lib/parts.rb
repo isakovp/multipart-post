@@ -36,7 +36,7 @@ module Parts
 
     def build_part(boundary, name, value)
       value = value.respond_to?(:value) ? value.value : value;
-      content_type = value.respond_to?(:content_type) ? value.content_type : nil;
+      content_type = value.respond_to?(:param_content_type) ? value.param_content_type : nil;
       part = ''
       part << "--#{boundary}\r\n"
       part << "Content-Disposition: form-data; name=\"#{name.to_s}\"\r\n"

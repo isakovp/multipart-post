@@ -35,9 +35,12 @@ module Parts
     end 
 
     def build_part(boundary, name, value)
+      value = value.respond_to?(:value) ? value.value : value;
+      content_type = value.respond_to?(:content_type) ? value.content_type : nil;
       part = ''
       part << "--#{boundary}\r\n"
       part << "Content-Disposition: form-data; name=\"#{name.to_s}\"\r\n"
+      part << "Content-Type: #{content_type}\r\n" if content_type.present?
       part << "\r\n"
       part << "#{value}\r\n"
     end
